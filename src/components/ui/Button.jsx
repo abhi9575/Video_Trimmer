@@ -6,10 +6,15 @@ export default function Button({
   ...props
 }) {
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    outline:
-      "border border-blue-600 text-blue-600 hover:bg-blue-50",
-  };
+  primary:
+    "bg-blue-600 text-white hover:bg-blue-700",
+
+  outline:
+    "border border-blue-600 text-blue-600 hover:bg-blue-50",
+
+  white:
+    "bg-white text-blue-600 hover:bg-gray-100",
+};
 
   return (
     <button
