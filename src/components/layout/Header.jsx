@@ -1,17 +1,23 @@
+import { Link } from "react-router-dom";
 import Container from "./Container";
+import Button from "../ui/Button";
 
 export default function Header() {
   return (
-    <header className="border-b">
+    <header>
       <Container>
-        <div className="flex h-16 items-center justify-between">
-          <h1 className="text-xl font-bold">
-            Video Trimmer
-          </h1>
+        <div className="flex items-center justify-between">
+          <h1>Video Trimmer</h1>
 
-          <button className="rounded-md bg-black px-4 py-2 text-white">
-            Sign In
-          </button>
+          <div className="flex items-center gap-4">
+            <Button >
+             <Link to="/editor">Editor</Link>
+            </Button>
+
+            <Button variant="outline">
+              Sign In
+            </Button>
+          </div>
         </div>
       </Container>
     </header>

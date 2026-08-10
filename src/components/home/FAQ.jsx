@@ -1,5 +1,7 @@
 import Container from "../layout/Container";
 import SectionTitle from "../ui/SectionTitle";
+import Card from "../ui/Card";
+
 
 const faqs = [
   {
@@ -40,9 +42,8 @@ export default function FAQ() {
 
         <div className="mx-auto mt-12 max-w-3xl space-y-6">
           {faqs.map((faq) => (
-            <div
+            <Card
               key={faq.question}
-              className="rounded-xl border bg-white p-6"
             >
               <h3 className="font-semibold">
                 {faq.question}
@@ -51,7 +52,7 @@ export default function FAQ() {
               <p className="mt-3 text-gray-600">
                 {faq.answer}
               </p>
-            </div>
+            </Card >
           ))}
         </div>
       </Container>
