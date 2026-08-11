@@ -6,6 +6,7 @@ import Card from "../ui/Card";
 export default function UploadArea({setVideoFile}) {
   const fileInputRef = useRef(null);
 
+  //selected file
   const handleChooseVideo = () => {
     fileInputRef.current.click();
   };
@@ -18,6 +19,7 @@ export default function UploadArea({setVideoFile}) {
     setVideoFile(file);
   };
 
+  //dragged file
   const handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
