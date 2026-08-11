@@ -1,3 +1,5 @@
 HMR  -> Hot Module Replacement -- UI Update
 SaaS -> Software as a Service
 CTA  -> Call to Action   -- ex what does this button do.
+
+event.stopPropagation() => stops the event from continuing its journey up the DOM tree.

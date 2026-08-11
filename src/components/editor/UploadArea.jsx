@@ -1,11 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { UploadCloud } from "lucide-react";
 
 import Card from "../ui/Card";
 
-export default function UploadArea() {
+export default function UploadArea({setVideoFile}) {
   const fileInputRef = useRef(null);
-  const [videoFile, setVideoFile] = useState(null);
 
   const handleChooseVideo = () => {
     fileInputRef.current.click();
@@ -19,8 +18,28 @@ export default function UploadArea() {
     setVideoFile(file);
   };
 
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const file = event.dataTransfer.files[0];
+
+    if (!file) return;
+
+    setVideoFile(file);
+  };
+
   return (
-    <Card className="mx-auto mt-10 flex min-h-80 max-w-4xl flex-col items-center justify-center border-2 border-dashed">
+    <Card
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      className="mx-auto mt-10 flex min-h-80 max-w-4xl flex-col items-center justify-center border-2 border-dashed"
+    >
       <UploadCloud size={48} className="text-blue-600" />
 
       <h2 className="mt-5 text-2xl font-semibold">
@@ -50,11 +69,11 @@ export default function UploadArea() {
         Supported formats: MP4, MOV, AVI, MKV, WEBM
       </p>
 
-      {videoFile && (
+      {/* {videoFile && (
         <p className="mt-4 text-sm font-medium text-green-600">
           Selected: {videoFile.name}
         </p>
-      )}
+      )} */}
     </Card>
   );
 }
