@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function VideoPreview({
   videoFile,
   setDuration,
   startTime,
   endTime,
+  setCurrentTime,
 }) {
   const [videoUrl, setVideoUrl] = useState(null);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     if (!videoFile) {
@@ -15,11 +15,9 @@ export default function VideoPreview({
       return;
     }
 
-    // Temporary URL 
     const url = URL.createObjectURL(videoFile);
     setVideoUrl(url);
 
-    // Release the URL 
     return () => URL.revokeObjectURL(url);
   }, [videoFile]);
 
@@ -32,16 +30,19 @@ export default function VideoPreview({
   const handleTimeUpdate = (event) => {
     const video = event.currentTarget;
 
+    // Keep playback inside the selected trim range.
+    setCurrentTime(video.currentTime);
+
     if (video.currentTime >= endTime) {
       video.pause();
       video.currentTime = startTime;
+      setCurrentTime(startTime);
     }
   };
 
   return (
     <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl">
       <video
-        ref={videoRef}
         src={videoUrl}
         controls
         onLoadedMetadata={handleLoadedMetadata}

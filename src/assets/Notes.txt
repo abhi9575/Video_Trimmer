@@ -3,3 +3,20 @@ SaaS -> Software as a Service
 CTA  -> Call to Action   -- ex what does this button do.
 
 event.stopPropagation() => stops the event from continuing its journey up the DOM tree.
+
+onTimeUpdate => is an event listener that fires continuously as a video or audio element plays.
+
+It triggers every time the current playback position changes (typically 4 to 6 times per second while playing).
+
+
+//onPointers
+1. onPointerMove={handlePointerMove}
+What it listens for: Fires continuously whenever the cursor or finger moves over the timeline element.
+
+2. onPointerUp={handlePointerUp}
+What it listens for: Fires when the user releases the primary mouse button or lifts their finger off the screen.
+
+3. onPointerCancel={handlePointerUp}
+What it listens for: Fires when the browser interrupts a touch or drag interaction.
+
+4. onPointerDown is a modern browser event listener that fires the exact instant a user presses a mouse button down, touches a touchscreen, or presses a stylus onto an element.

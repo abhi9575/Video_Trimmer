@@ -6,6 +6,7 @@ export default function Timeline({
   endTime,
   setStartTime,
   setEndTime,
+  currentTime
 }) {
   const timelineRef = useRef(null);
   const [dragging, setDragging] = useState(null);
@@ -20,12 +21,17 @@ export default function Timeline({
   };
 
   const updateTimeFromPosition = (clientX, type) => {
+    //clientX: The exact X-coordinate (in pixels) where your cursor or finger is on the screen.
     const rect = timelineRef.current.getBoundingClientRect();
 
-    let position = (clientX - rect.left) / rect.width;
-    position = Math.max(0, Math.min(1, position));
+    let position = (clientX - rect.left) / rect.width;  
+    position = Math.max(0, Math.min(1, position));  
+    //position always b/w => 0.0 <-> 1.0
+    //If you drag past the right edge (e.g., position = 1.2), it caps it at 1.0 (100%).
+    //If you drag past the left edge (e.g., position = -0.1), it floor-caps it at 0.0 (0%).
 
-    const time = position * duration;
+    const time = position * duration; //Converting Percentage to Seconds
+
 
     if (type === "start") {
       setStartTime(Math.min(time, endTime - 1));
@@ -37,8 +43,9 @@ export default function Timeline({
   const handlePointerDown = (event, type) => {
     event.currentTarget.setPointerCapture(event.pointerId);
     setDragging(type);
+    //setPointerCapture=>"glues" all incoming mouse/touch movements directly to this handle element until the user lets go
 
-    updateTimeFromPosition(event.clientX, type);
+    updateTimeFromPosition(event.clientX, type); //Reads the horizontal screen coordinate (event.clientX) and updates the video timestamp
   };
 
   const handlePointerMove = (event) => {
@@ -58,6 +65,10 @@ export default function Timeline({
   const endPosition = duration
     ? (endTime / duration) * 100
     : 100;
+
+    const currentPosition = duration
+  ? (currentTime / duration) * 100
+  : 0;
 
   return (
     <div className="mx-auto mt-8 max-w-4xl">
@@ -128,7 +139,13 @@ export default function Timeline({
           ))}
         </div>
 
+        {/* Shows where the video is currently playing. */}
         <div
+          className="absolute top-0 z-10 h-full w-0.5 bg-black"
+          style={{ left: `${currentPosition}%` }}
+        />
+
+        <div                             //-translate-x-1/2 =>transform x = left-right 1/2=> move 50% of it's own width
           className="absolute top-0 h-full w-3 -translate-x-1/2 cursor-ew-resize bg-blue-600"
           style={{ left: `${startPosition}%` }}
           onPointerDown={(event) =>

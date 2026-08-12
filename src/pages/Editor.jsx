@@ -12,6 +12,7 @@ export default function Editor() {
   const [duration, setDuration] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0); //curret playback position
 
   const handleDurationChange = (value) => {
     setDuration(value);
@@ -38,6 +39,7 @@ export default function Editor() {
   setDuration={handleDurationChange}
   startTime={startTime}
   endTime={endTime}
+  setCurrentTime={setCurrentTime}
 />
 
           {videoFile && (
@@ -47,6 +49,7 @@ export default function Editor() {
               endTime={endTime}
               setStartTime={setStartTime}
               setEndTime={setEndTime}
+              currentTime={currentTime}
             />
           )}
         </Container>
