@@ -20,3 +20,19 @@ What it listens for: Fires when the user releases the primary mouse button or li
 What it listens for: Fires when the browser interrupts a touch or drag interaction.
 
 4. onPointerDown is a modern browser event listener that fires the exact instant a user presses a mouse button down, touches a touchscreen, or presses a stylus onto an element.
+
+
+What is FormData?
+FormData is a built-in browser object designed specifically to simulate an HTML <form>. Its primary superpower is sending raw files (videos, images, PDFs, audio) from a web browser to a backend server.
+
+
+
+Blob
+A Blob (short for Binary Large Object) is a built-in browser object that represents raw, unformatted binary data stored directly in your computer's memory (RAM).
+
+Instead of storing formatted data like standard text, numbers, or JSON objects, a Blob holds raw bytes representing files—such as videos, audio, images, or zipped archives.
+
+Why Do We Need Blobs in JavaScript?
+Standard JavaScript strings and arrays are built to handle human-readable text. However, media files like a 100MB MP4 video consist of millions of binary 0s and 1s.
+
+Blobs provide a lightweight wrapper around these raw bytes so JavaScript can manipulate large files without crashing browser memory.

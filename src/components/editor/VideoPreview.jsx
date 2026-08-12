@@ -6,6 +6,7 @@ export default function VideoPreview({
   startTime,
   endTime,
   setCurrentTime,
+  videoRef
 }) {
   const [videoUrl, setVideoUrl] = useState(null);
 
@@ -44,6 +45,7 @@ export default function VideoPreview({
     <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl">
       <video
         src={videoUrl}
+        ref={videoRef}
         controls
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
